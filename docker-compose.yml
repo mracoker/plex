@@ -1,0 +1,24 @@
+version: "3.4"
+
+#networks:
+
+volumes:
+    plexMSDatabase:
+    plexMSTranscode:
+    plexMSData:
+
+services:
+    plex:
+        container_name: plex
+        image: plexinc/pms-docker
+        ports:
+            - 32400:32400
+        restart: always
+        environment:
+            - TZ="Europe/Amsterdam"
+        volumes:
+            - plexMSDatabase:/config
+            - plexMSTranscode:/transcode
+            - plexMSData:/data
+            # optionally also add direct paths, Read Only example: - /any/additional/paths/with/permissions/:/myPhotos:ro
+            # optionally also add direct paths, Read&Write example: - /any/additional/paths/with/permissions/:/myFilms:rw
